@@ -1,3 +1,5 @@
+import math
+
 class SNV_Reads:
     def __init__(self, adenine_reads, cytosine_reads, guanine_reads, thymine_reads, position, sample_id, number_of_variants, share):
         self.adenine_reads = adenine_reads
@@ -7,7 +9,7 @@ class SNV_Reads:
         self.position = position
         self.sample_id = sample_id
         self.number_of_variants = number_of_variants
-        self.share = number_of_variants
+        self.share = share
 
     def total_coverage(self): # returns total coverage
         return self.adenine_reads + self.cytosine_reads + self.guanine_reads + self.thymine_reads
@@ -49,4 +51,16 @@ for read in data:
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
 
-data = data[1:10]
+
+number_of_reads = []
+
+for read in data:
+    number_of_reads.append(read.total_coverage())
+
+threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.0)] #set a threshold for the snv's with small number of reads
+
+for read in data:
+    if read.total_coverage() < threshold:
+        data.remove(read) # remove all reads smaller than threshold
+
+data = data
