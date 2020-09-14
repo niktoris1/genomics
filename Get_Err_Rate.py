@@ -26,10 +26,14 @@ def LogLikelyhoodFunction1 (read, error_rate): #returns LLH function with one tr
     true_variants = get_max_and_min_variants(read, 1)[0]  # returns dictionary with 1 name of the most frequent nycleotyde and number of reads with them
     false_variants = get_max_and_min_variants(read, 1)[1] # returns dictionary with 3 names of other nycleotydes
 
-    #print('ERR =', error_rate)
-    LLH_value = StirlingLogFactorial(read.total_coverage()) - StirlingLogFactorial(true_variants[0][1]) - \
-                - StirlingLogFactorial(read.total_coverage() - true_variants[0][1]) + true_variants[0][1] * \
-                log(1 - error_rate) + (read.total_coverage() - true_variants[0][1]) * log(error_rate)
+    a = StirlingLogFactorial(read.total_coverage())
+    b = StirlingLogFactorial(true_variants[0][1])
+    c = StirlingLogFactorial(read.total_coverage() - true_variants[0][1])
+    d = true_variants[0][1] * log(1 - error_rate)
+    e = (read.total_coverage() - true_variants[0][1]) * log(error_rate)
+
+    LLH_value = StirlingLogFactorial(read.total_coverage()) - StirlingLogFactorial(true_variants[0][1])- StirlingLogFactorial(read.total_coverage() - true_variants[0][1])+true_variants[0][1] * log(1 - error_rate)+(read.total_coverage() - true_variants[0][1]) * log(error_rate)
+
     return LLH_value
 
 
@@ -73,35 +77,35 @@ def LogLikelyhoodFunction2(read, error_rate, share): #returns LLH function with 
 
 def GetBestLLHValue(read, error_rate): # We are given an error rate and have to give the answer - is there one or two maximums and if 2 - what is the share if 2? LLH for 1 is known, for 2 - we have to optimise it by share
     LLH1_value = LogLikelyhoodFunction1(read, error_rate)
-    print('LLH1', LLH1_value)
+    #print('LLH1', LLH1_value)
     start_share = [0.9]
     #bounds = Bounds([0.5], [0.99])
     #LLH2 = scipy.optimize.minimize(lambda share, read, error_rate: (-1) * LogLikelyhoodFunction2(read, error_rate, share), start_share, args=(read, error_rate), method='trust-constr', bounds = bounds)
 
-    LLH2 = scipy.optimize.minimize(
-        lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), start_share,
-       args=(read, error_rate), method='Nelder-Mead', options={'xatol': 1e-8})
+    #LLH2 = scipy.optimize.minimize(
+    #    lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), start_share,
+    #   args=(read, error_rate), method='Nelder-Mead', options={'xatol': 1e-8})
 
-    #LLH2 = scipy.optimize.minimize_scalar(
-    #    lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), bounds = (0, 1),
-    #    args=(read, error_rate), method='bounded', options={'xatol': 1e-8})
+    LLH2 = scipy.optimize.minimize_scalar(
+        lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), bounds = (0, 1),
+        args=(read, error_rate), method='bounded', options={'xatol': 1e-4})
 
     LLH2_value = - LLH2.fun
     LLH2_arg = LLH2.x
 
 
-    print('LLH2', LLH2_value)
+    #print('LLH2', LLH2_value)
 
     if LLH2_arg > 0.999: # We do not bother with samples, where second variant is extremely small
         #print('!!!!!!!!!!!!!!!!')
-        print("LLH with one variant. Value is", LLH1_value)
+        #print("LLH with one variant. Value is", LLH1_value)
         return [1, LLH1_value]
 
     if LLH1_value > LLH2_value:
-        print("LLH with one variant. Value is", LLH1_value)
+        #print("LLH with one variant. Value is", LLH1_value)
         return [1, LLH1_value] # return an indication, that LLH1 is better, plus LLH1 itself
     else:
-        print("LLH with two variants. Value is", LLH2_value, 'share', LLH2_arg)
+        #print("LLH with two variants. Value is", LLH2_value, 'share', LLH2_arg)
         return [2, LLH2_value, LLH2_arg] # return an indication, that LLH2 is better, plus LLH2 itself and share, what share is the best
 
 def ResultingLLH(data, error_rate):
@@ -127,7 +131,7 @@ def GetErrorAndSplitReads(data): # returns error rate
 
     result = scipy.optimize.minimize_scalar(
         lambda error_rate, data: - ResultingLLH(data, error_rate), bounds = (0, 1),
-        args=(data), method='bounded', options= {'xatol': 1e-8}).x
+        args=(data), method='bounded', options= {'xatol': 1e-4}).x
 
     end_time = time.perf_counter()
 
@@ -135,30 +139,22 @@ def GetErrorAndSplitReads(data): # returns error rate
 
     return [result, data]
 
-#[result, data] = GetErrorAndSplitReads(data)
 
 
+[result, data] = GetErrorAndSplitReads(data)
+
+#x = np.arange(0.00, 1, 0.01)
+
+#y = []
+#z = []
+#for value in x:
+#    z.append(LogLikelyhoodFunction1(read, 0.001))
+#    y.append(LogLikelyhoodFunction2(read, 0.001, value))
 
 
-read = SNV_Reads(50, 50, 0, 0, 0, 0, 'Unknown', 'Unknown')
-
-print(LogLikelyhoodFunction1(read, 0.001))
-print(LogLikelyhoodFunction2(read, 0.001, 0.5))
-
-print(GetBestLLHValue(read, 0.001))
-
-x = np.arange(0.00, 1, 0.01)
-
-y = []
-z = []
-for value in x:
-    z.append(LogLikelyhoodFunction1(read, 0.001))
-    y.append(LogLikelyhoodFunction2(read, 0.001, value))
-
-
-plt.plot(x, y)
-plt.plot(x, z)
-plt.show()
+#plt.plot(x, y)
+#plt.plot(x, z)
+#plt.show()
 
 
 

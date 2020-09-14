@@ -59,6 +59,11 @@ for read in data:
 
 threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.99)] #set a threshold for the snv's with small number of reads
 
+print(len(data))
+
 for read in data:
     if read.total_coverage() < threshold:
         data.remove(read) # remove all reads smaller than threshold
+
+print(len(data))
+
