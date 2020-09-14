@@ -57,7 +57,7 @@ number_of_reads = []
 for read in data:
     number_of_reads.append(read.total_coverage())
 
-threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.9)] #set a threshold for the snv's with small number of reads
+threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.99)] #set a threshold for the snv's with small number of reads
 
 for read in data:
     if read.total_coverage() < threshold:
