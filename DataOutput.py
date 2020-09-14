@@ -12,6 +12,6 @@ for read in data:
     outfile.write(str(read.thymine_reads) + ' Thymine reads' + '\n')
     outfile.write('There are ' + str(read.number_of_variants) + ' valid variants' + '\n')
     for snv in get_max_and_min_variants(read, read.number_of_variants)[0]:
-        outfile.write(str(snv[0]) + ' is valid with share ' + str(read.share) + '\n\n')
+        outfile.write(str(snv[0]) + ' is valid with share ' + str(snv.share) + '\n\n')
 
 outfile.close()
