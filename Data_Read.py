@@ -52,18 +52,18 @@ for read in data:
         read.sample_id = int(read.sample_id)
 
 
-number_of_reads = []
+#number_of_reads = []
 
-for read in data:
-    number_of_reads.append(read.total_coverage())
+#for read in data:
+#    number_of_reads.append(read.total_coverage())
 
-threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.99)] #set a threshold for the snv's with small number of reads
+#threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.99)] #set a threshold for the snv's with small number of reads
 
-print(len(data))
+#print(len(data))
 
-for read in data:
-    if read.total_coverage() < threshold:
-        data.remove(read) # remove all reads smaller than threshold
+#for read in data:
+#    if read.total_coverage() < threshold:
+#        data.remove(read) # remove all reads smaller than threshold
 
-print(len(data))
+#print(len(data))
 
