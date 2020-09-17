@@ -87,7 +87,7 @@ def GetBestLLHValue(read, error_rate): # We are given an error rate and have to 
     #   args=(read, error_rate), method='Nelder-Mead', options={'xatol': 1e-8})
 
     LLH2 = scipy.optimize.minimize_scalar(
-        lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), bounds = (0, 1),
+        lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), bounds=(0.5, 0.99),
         args=(read, error_rate), method='bounded', options={'xatol': 1e-4})
 
     LLH2_value = - LLH2.fun
@@ -96,7 +96,7 @@ def GetBestLLHValue(read, error_rate): # We are given an error rate and have to 
 
     #print('LLH2', LLH2_value)
 
-    if LLH2_arg > 0.999: # We do not bother with samples, where second variant is extremely small
+    if LLH2_arg >= 0.989: # We do not bother with samples, where second variant is extremely small
         #print('!!!!!!!!!!!!!!!!')
         #print("LLH with one variant. Value is", LLH1_value)
         return [1, LLH1_value]
