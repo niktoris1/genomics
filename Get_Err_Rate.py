@@ -1,23 +1,12 @@
 from Data_Read import data, get_max_and_min_variants, SNV_Reads
+from math_funcs import StirlingLogFactorial
 import math
-from math import factorial, log, comb
+from math import log
 import scipy
 from scipy.special import logsumexp
 from scipy import optimize
-from scipy.optimize import Bounds
-import matplotlib.pyplot as plt
-import numpy as np
+
 import time
-
-def perm(N, k): # have to write it from scratch, because in-built scipy.special.perm method is buggy in scipy 1.5.2 and returns inf. Since scipy 1.6.0 is supported only by older versions of python - we do this stuff
-    return math.factorial(N) // (math.factorial(k) * (math.factorial(N-k)))
-
-def StirlingLogFactorial(n):
-    if n == 0:
-        return 0
-    else:
-        return (n + 0.5) * log(n) - n + 0.5 * log(2 * math.pi)
-
 
 def LogLikelyhoodFunction1 (read, error_rate): #returns LLH function with one true result
     if error_rate <= 0 or error_rate >= 1:
@@ -25,12 +14,6 @@ def LogLikelyhoodFunction1 (read, error_rate): #returns LLH function with one tr
         raise ValueError
     true_variants = get_max_and_min_variants(read, 1)[0]  # returns dictionary with 1 name of the most frequent nycleotyde and number of reads with them
     false_variants = get_max_and_min_variants(read, 1)[1] # returns dictionary with 3 names of other nycleotydes
-
-    a = StirlingLogFactorial(read.total_coverage())
-    b = StirlingLogFactorial(true_variants[0][1])
-    c = StirlingLogFactorial(read.total_coverage() - true_variants[0][1])
-    d = true_variants[0][1] * log(1 - error_rate)
-    e = (read.total_coverage() - true_variants[0][1]) * log(error_rate)
 
     LLH_value = StirlingLogFactorial(read.total_coverage()) - StirlingLogFactorial(true_variants[0][1])- StirlingLogFactorial(read.total_coverage() - true_variants[0][1])+true_variants[0][1] * log(1 - error_rate)+(read.total_coverage() - true_variants[0][1]) * log(error_rate)
 

@@ -35,13 +35,20 @@ raw_data = [line.split() for line in file]
 data = []
 
 for position_reads in raw_data[1:]:
+    start_el = 0 # needed for quite unelegant solution of several similar reads on one position - python methos "index" returns the first occurence in the list. Fixed
     for sample_reads in position_reads[1:]:
         freqs = sample_reads.split('_')
-        data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_reads[0], raw_data[0][position_reads.index(sample_reads)], 'Unknown', 'Unknown'))
+        data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_reads[0], raw_data[0][position_reads.index(sample_reads, start_el)], 'Unknown', 'Unknown'))
+        start_el = position_reads.index(sample_reads) + 1
 
 for read in data:
-    if read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA':
+    if read.sample_id == '7553' and read.position == '27576':
+        print('!')
+
+for read in data:
+    if (read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA'):
         data.remove(read)
+
 
 for read in data:
         read.adenine_reads = int(read.adenine_reads)
@@ -50,6 +57,10 @@ for read in data:
         read.thymine_reads = int(read.thymine_reads)
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
+
+
+
+
 
 
 #number_of_reads = []

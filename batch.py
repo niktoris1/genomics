@@ -1,3 +1,5 @@
+from math_funcs import StirlingLogFactorial
+
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jun 26 07:38:03 2020
@@ -10,14 +12,12 @@ from scipy import optimize
 
 import time
 
-from LogFactiorial import LogFactorial
-
 random.seed(2039681)
 
 # haps = [["A","A","T","C","A","G"],["A","A","G","C","A","G"],["G","C","G","T","T","A"]]
 # haps = [[1,1,1,0,0,0],[1,1,0,0,0,0],[0,0,0,1,1,1]]
-haplotypes = [[1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-              [0, 0, 0, 1, 1, 0, 0,1 , 1, 1]]  # Ground truth haplotypes
+haplotypes = [[1, 1, 0, 0],
+              [0, 0, 1, 1]]  # Ground truth haplotypes
 haplotypeLength = len(haplotypes[0])
 coverage = 100  # [80 + random.binomial(40, 0.5) for _ in hapLen] - coverage
 num_of_haplotypes = len(haplotypes)  # Number of haplotypes
@@ -30,8 +30,8 @@ class Sample:
         self.reads = self.SimReads(num_of_haplotypes, coverage, haps, er_rate)  # Observed data - read counts
         self.coef = []
         for snv in range(len(self.reads)):
-            lf = LogFactorial(self.reads[snv][0] + self.reads[snv][1]) - LogFactorial(
-                self.reads[snv][0]) - LogFactorial(self.reads[snv][1])
+            lf = StirlingLogFactorial(self.reads[snv][0] + self.reads[snv][1]) - StirlingLogFactorial(
+                self.reads[snv][0]) - StirlingLogFactorial(self.reads[snv][1])
             self.coef.append(lf)
         self.coef = sum(self.coef)
         #print("the sum is", self.coef)
@@ -144,13 +144,14 @@ def optimise_prevs_const_haps(haps, num_of_haplotypes, er_rate, samples, prevs):
     for sample_num in range(len(samples)):
         bnds = ((0, 1), ) * 1 # length of prev
 
-        opt_res = optimize.minimize(sampleLLH, prevs[sample_num], args=(haps, samples[sample_num], er_rate), method='trust-constr', bounds=bnds, options = {'xtol': 1e-6, 'gtol': 1e-6, 'barrier_tol': 1e-6, 'maxiter': 100})
+        opt_res = optimize.minimize(sampleLLH, prevs[sample_num], args=(haps, samples[sample_num], er_rate), method='trust-constr', bounds=bnds, options = {'xtol': 1e-4, 'gtol': 1e-4, 'maxiter': 100})
 
         out_prevs.append(opt_res.x)
         llh += opt_res.fun
 
     #print('opt prevs:', out_prevs)
     #print('LLH:', LLH(haps, num_of_haplotypes, er_rate, samples, out_prevs))
+
     print ('OPTIMIZED PREVS')
 
     return out_prevs
@@ -162,7 +163,7 @@ def optimise_haps_const_prevs(haps, num_of_haplotypes, er_rate, samples, prevs):
     #linear_constraint = optimize.LinearConstraint([[1.0 for _ in range(len(bounds))]], [0.0],
     #                                                [1.0])      # for all x, 0 <= x <=1
 
-    opt_res = optimize.minimize(LLH, haps, args=(num_of_haplotypes, er_rate, samples, prevs), method='trust-constr', bounds = bnds, options = {'xtol': 1e-6, 'gtol': 1e-6, 'barrier_tol': 1e-6, 'maxiter': 100})
+    opt_res = optimize.minimize(LLH, haps, args=(num_of_haplotypes, er_rate, samples, prevs), method='trust-constr', bounds = bnds, options = {'xtol': 1e-4, 'gtol': 1e-4, 'maxiter': 100})
     opt_haps = opt_res.x
 
     #print('opt haps:', opt_haps)
@@ -195,7 +196,7 @@ for _ in range(5):
     opt_haps = optimise_haps_const_prevs(opt_haps, num_of_haplotypes, er_rate, samples, opt_prevs)
     opt_prevs = optimise_prevs_const_haps(opt_haps, num_of_haplotypes, er_rate, samples, opt_prevs)
 
-print ("time elapsed: {:.2f}s".format(time.time() - start_time))
+print ("time elapsed: {:.2f}s". format(time.time() - start_time))
 
 print ('RESULT')
 print (opt_haps)
