@@ -58,73 +58,84 @@ def LogLikelyhoodFunction2(read, error_rate, share): #returns LLH function with 
     return LLH_value
 
 
-def GetBestLLHValue(read, error_rate): # We are given an error rate and have to give the answer - is there one or two maximums and if 2 - what is the share if 2? LLH for 1 is known, for 2 - we have to optimise it by share
+def GetBestLLHValueByRead(read, error_rate, share): # We are given an error rate and share and have to give the answer - is there one or two maximums and if 2 (in assumption, that the share in 2 is known)? 
     LLH1_value = LogLikelyhoodFunction1(read, error_rate)
-    #print('LLH1', LLH1_value)
-    start_share = [0.9]
-    #bounds = Bounds([0.5], [0.99])
-    #LLH2 = scipy.optimize.minimize(lambda share, read, error_rate: (-1) * LogLikelyhoodFunction2(read, error_rate, share), start_share, args=(read, error_rate), method='trust-constr', bounds = bounds)
+    LLH2_value = LogLikelyhoodFunction2(read, error_rate, share)
 
-    #LLH2 = scipy.optimize.minimize(
-    #    lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), start_share,
-    #   args=(read, error_rate), method='Nelder-Mead', options={'xatol': 1e-8})
-
-    LLH2 = scipy.optimize.minimize_scalar(
-        lambda share, read, error_rate: - LogLikelyhoodFunction2(read, error_rate, share), bounds=(0.5, 0.99),
-        args=(read, error_rate), method='bounded', options={'xatol': 1e-4})
-
-    LLH2_value = - LLH2.fun
-    LLH2_arg = LLH2.x
-
-
-    #print('LLH2', LLH2_value)
-
-    if LLH2_arg >= 0.989: # We do not bother with samples, where second variant is extremely small
-        #print('!!!!!!!!!!!!!!!!')
-        #print("LLH with one variant. Value is", LLH1_value)
+    if share >= 0.989: # We do not bother with samples, where second variant is extremely small
         return [1, LLH1_value]
 
     if LLH1_value > LLH2_value:
-        #print("LLH with one variant. Value is", LLH1_value)
         return [1, LLH1_value] # return an indication, that LLH1 is better, plus LLH1 itself
     else:
-        #print("LLH with two variants. Value is", LLH2_value, 'share', LLH2_arg)
-        return [2, LLH2_value, LLH2_arg] # return an indication, that LLH2 is better, plus LLH2 itself and share, what share is the best
-
-def ResultingLLH(data, error_rate):
-    LLH = 0
+        return [2, LLH2_value, share] # return an indication, that LLH2 is better, plus LLH2 itself and share, what share is the best
+    
+def ResultingLLHByPerson(sample_id, error_rate, share):
+    LLH_Value = 0
     for read in data:
-        LLH += GetBestLLHValue(read, error_rate)[1]
-        read.number_of_variants = GetBestLLHValue(read, error_rate)[0]
-        if read.number_of_variants == 2:
-            read.share = GetBestLLHValue(read, error_rate)[2]
-        else:
-            read.share = 1
-    print('Resulting LLH', LLH, 'with error rate', error_rate)
-    return LLH
+        if read.sample_id == sample_id:
+            LLH_Value += GetBestLLHValueByRead(read, error_rate, share)[1]
 
-def GetErrorAndSplitReads(data): # returns error rate
-    start_error = 0.002
+            read.number_of_variants = GetBestLLHValueByRead(read, error_rate, share)[0]
+            if read.number_of_variants == 2:
+                read.share = GetBestLLHValueByRead(read, error_rate)[2]
+            else:
+                read.share = 1
+    
+    return LLH_Value
 
-    start_time = time.perf_counter()
+def OptimiseLLHByPerson(sample_id, error_rate): # We optimise it in assumption, that we know an error
 
-    #result = scipy.optimize.minimize(
-    #    lambda error_rate, data: - ResultingLLH(data, error_rate), start_error,
-    #    args=(data), method='Nelder-Mead', options= {'xatol': 1e-8}).x
+    start_share = 0.9
+    LLH = scipy.optimize.minimize(
+        lambda share, sample_id, error_rate: - ResultingLLHByPerson(sample_id, error_rate, share), start_share,
+       args=(sample_id, error_rate), method='Nelder-Mead', options={'xatol': 1e-4})
 
-    result = scipy.optimize.minimize_scalar(
-        lambda error_rate, data: - ResultingLLH(data, error_rate), bounds = (0, 1),
-        args=(data), method='bounded', options= {'xatol': 1e-4}).x
+    LLH_value = - LLH.fun
+    share = LLH.x
 
-    end_time = time.perf_counter()
+    print('LLH optimised for person', sample_id, 'value', LLH_value)
+    
+    return [LLH_value, share]
 
-    print('Error rate is', result, 'Time is', end_time - start_time)
+def ResultingLLHByData(data, error_rate):
+    samples = []
 
-    return [result, data]
+    for read in data:
+        if read.sample_id not in data:
+            samples.append([read.sample_id])
+
+    LLH_value = 0
+    for sample in samples:
+        LLH_value += OptimiseLLHByPerson(sample[0], error_rate)[0]
+        sample.append(OptimiseLLHByPerson(sample[0], error_rate)[1])
+
+    return [LLH_value, samples] # return an array and samples in the following form [sample_id, share in sample]
+
+def OptimiseLLHByData(data):
+
+    start_error = 0.001
+    LLH = scipy.optimize.minimize(
+        lambda error_rate, data: - ResultingLLHByData(data, error_rate)[0], start_error,
+        args=(data), method='Nelder-Mead', options={'xatol': 1e-4})
+
+
+    LLH_value = - LLH.fun
+    samples = ResultingLLHByData(data, LLH.x)[1]
+    error = LLH.x
+
+    print('Value:', LLH_value, 'Error:', error)
+
+    return [LLH_value, samples, error]
+
+result = OptimiseLLHByData(data)
 
 
 
-[result, data] = GetErrorAndSplitReads(data)
+
+
+
+
 
 #x = np.arange(0.00, 1, 0.01)
 

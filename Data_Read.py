@@ -58,6 +58,8 @@ for read in data:
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
 
+data = data[1:10]
+
 
 
 
