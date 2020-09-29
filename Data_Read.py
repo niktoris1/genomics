@@ -41,9 +41,6 @@ for position_reads in raw_data[1:]:
         data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_reads[0], raw_data[0][position_reads.index(sample_reads, start_el)], 'Unknown', 'Unknown'))
         start_el = position_reads.index(sample_reads) + 1
 
-for read in data:
-    if read.sample_id == '7553' and read.position == '27576':
-        print('!')
 
 for read in data:
     if (read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA'):
@@ -58,7 +55,6 @@ for read in data:
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
 
-data = data[1:10]
 
 
 

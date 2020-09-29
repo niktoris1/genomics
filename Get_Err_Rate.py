@@ -1,5 +1,5 @@
 from Data_Read import data, get_max_and_min_variants, SNV_Reads
-from math_funcs import StirlingLogFactorial
+from math_funcs import StirlingLogFactorial, GetLetter
 import math
 from math import log
 import scipy
@@ -78,7 +78,7 @@ def ResultingLLHByPerson(sample_id, error_rate, share):
 
             read.number_of_variants = GetBestLLHValueByRead(read, error_rate, share)[0]
             if read.number_of_variants == 2:
-                read.share = GetBestLLHValueByRead(read, error_rate)[2]
+                read.share = GetBestLLHValueByRead(read, error_rate, share)[2]
             else:
                 read.share = 1
     
@@ -87,9 +87,9 @@ def ResultingLLHByPerson(sample_id, error_rate, share):
 def OptimiseLLHByPerson(sample_id, error_rate): # We optimise it in assumption, that we know an error
 
     start_share = 0.9
-    LLH = scipy.optimize.minimize(
-        lambda share, sample_id, error_rate: - ResultingLLHByPerson(sample_id, error_rate, share), start_share,
-       args=(sample_id, error_rate), method='Nelder-Mead', options={'xatol': 1e-4})
+    LLH = scipy.optimize.minimize_scalar(
+        lambda share, sample_id, error_rate: - ResultingLLHByPerson(sample_id, error_rate, share), bounds = (0, 1),
+       args=(sample_id, error_rate), method='bounded', options={'xatol': 1e-4})
 
     LLH_value = - LLH.fun
     share = LLH.x
@@ -102,22 +102,23 @@ def ResultingLLHByData(data, error_rate):
     samples = []
 
     for read in data:
-        if read.sample_id not in data:
+        if read.sample_id not in samples:
             samples.append([read.sample_id])
 
     LLH_value = 0
     for sample in samples:
-        LLH_value += OptimiseLLHByPerson(sample[0], error_rate)[0]
-        sample.append(OptimiseLLHByPerson(sample[0], error_rate)[1])
+        sample_res = OptimiseLLHByPerson(sample[0], error_rate)
+        LLH_value += sample_res[0]
+        sample.append(sample_res[1])
 
     return [LLH_value, samples] # return an array and samples in the following form [sample_id, share in sample]
 
 def OptimiseLLHByData(data):
 
     start_error = 0.001
-    LLH = scipy.optimize.minimize(
-        lambda error_rate, data: - ResultingLLHByData(data, error_rate)[0], start_error,
-        args=(data), method='Nelder-Mead', options={'xatol': 1e-4})
+    LLH = scipy.optimize.minimize_scalar(
+        lambda error_rate, data: - ResultingLLHByData(data, error_rate)[0], bounds=(0, 1),
+        args=(data), method='bounded', options={'xatol': 1e-4})
 
 
     LLH_value = - LLH.fun
@@ -128,7 +129,51 @@ def OptimiseLLHByData(data):
 
     return [LLH_value, samples, error]
 
+
+
+def GetStamms(data):
+
+    samples = []
+
+    for read in data:
+        if read.sample_id not in samples:
+            samples.append([read.sample_id])
+
+    for sample_id in samples:
+        sample_id.append('')
+        sample_id.append('')
+
+        for read in data:
+            if read.sample_id == sample_id[0]:
+                if read.share == 1:
+                    number_of_variants = 1
+                else:
+                    number_of_variants = 2
+                variants = get_max_and_min_variants(read, number_of_variants)
+                if number_of_variants == 1:
+
+                    sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
+                    sample_id[2] = sample_id[2] + GetLetter(variants[0][0][0])
+                if number_of_variants == 2:
+                    sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
+                    sample_id[2] = sample_id[2] + GetLetter(variants[0][1][0])
+
+        if sample_id[1] == sample_id[2]:
+            sample_id.remove(sample_id[2])
+
+    return samples
+
 result = OptimiseLLHByData(data)
+stamms = GetStamms(data)
+
+
+
+
+
+
+
+
+
 
 
 
