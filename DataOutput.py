@@ -1,4 +1,6 @@
-from Get_Err_Rate import result, data, get_max_and_min_variants, stamms
+from Get_Err_Rate import result, data, get_max_and_min_variants, stamms, start_time, end_time
+
+
 
 outfile = open("result.txt", "w")
 
@@ -29,4 +31,5 @@ for sample in stamms:
         outfile.write('First one is ' + str(sample[1]) + '\n')
         outfile.write('Second one is ' + str(sample[2]) + '\n\n')
 
+outfile.write('Time elapsed: ' + str(end_time - start_time) + ' seconds')
 outfile.close()

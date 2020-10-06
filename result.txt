@@ -1,4 +1,4 @@
-The sequencing error is: 0.0026970257176022116
+The sequencing error is: 0.0019837048321234563
 Read of sample number 4144 in position 583
 2 Adenine reads
 9 Cytosine reads
@@ -389,7 +389,7 @@ Read of sample number 8372 in position 583
 0 Guanine reads
 40 Thymine reads
 There are 2 valid variants
-cytosine_reads is valid with share 0.9165710530665563
+cytosine_reads is valid with share 0.916386188349866
 
 Read of sample number 8373 in position 583
 1 Adenine reads
@@ -487,1550 +487,190 @@ Read of sample number 8429 in position 583
 There are 1 valid variants
 thymine_reads is valid with share 1
 
-Read of sample number 4144 in position 675
-20 Adenine reads
-2 Cytosine reads
-20482 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4584 in position 675
-8 Adenine reads
-3 Cytosine reads
-3822 Guanine reads
-2 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4585 in position 675
-0 Adenine reads
-0 Cytosine reads
-213 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4591 in position 675
-9 Adenine reads
-10 Cytosine reads
-7221 Guanine reads
-3 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4649 in position 675
-0 Adenine reads
-0 Cytosine reads
-506 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4686 in position 675
-3 Adenine reads
-0 Cytosine reads
-1006 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4693 in position 675
-2 Adenine reads
-0 Cytosine reads
-2091 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4694 in position 675
-1 Adenine reads
-0 Cytosine reads
-1233 Guanine reads
-2 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4696 in position 675
-6 Adenine reads
-0 Cytosine reads
-2549 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4697 in position 675
-0 Adenine reads
-0 Cytosine reads
-410 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4705 in position 675
-8 Adenine reads
-3 Cytosine reads
-2596 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4706 in position 675
-2 Adenine reads
-0 Cytosine reads
-1732 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4707 in position 675
-1 Adenine reads
-0 Cytosine reads
-640 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4711 in position 675
-1 Adenine reads
-0 Cytosine reads
-468 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4712 in position 675
-6 Adenine reads
-5 Cytosine reads
-2800 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4713 in position 675
-1 Adenine reads
-0 Cytosine reads
-1722 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4723 in position 675
-3 Adenine reads
-0 Cytosine reads
-1647 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4724 in position 675
-4 Adenine reads
-0 Cytosine reads
-1180 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4726 in position 675
-2 Adenine reads
-0 Cytosine reads
-709 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4728 in position 675
-2 Adenine reads
-0 Cytosine reads
-897 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4780 in position 675
-5 Adenine reads
-11 Cytosine reads
-2965 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4781 in position 675
-0 Adenine reads
-0 Cytosine reads
-1375 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4938 in position 675
-3 Adenine reads
-5 Cytosine reads
-1948 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4969 in position 675
-4 Adenine reads
-4 Cytosine reads
-1982 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4970 in position 675
-1 Adenine reads
-4 Cytosine reads
-1866 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4972 in position 675
-3 Adenine reads
-3 Cytosine reads
-2109 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4980 in position 675
-2 Adenine reads
-6 Cytosine reads
-2319 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4983 in position 675
-5 Adenine reads
-7 Cytosine reads
-2410 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4984 in position 675
-7 Adenine reads
-5 Cytosine reads
-2213 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4985 in position 675
-2 Adenine reads
-1 Cytosine reads
-1382 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4988 in position 675
-1 Adenine reads
-2318 Cytosine reads
-189 Guanine reads
-4 Thymine reads
-There are 2 valid variants
-cytosine_reads is valid with share 0.9252021851839761
-
-Read of sample number 5029 in position 675
-1 Adenine reads
-3 Cytosine reads
-662 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5033 in position 675
-4 Adenine reads
-4 Cytosine reads
-1210 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5047 in position 675
-5 Adenine reads
-5 Cytosine reads
-1048 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5633 in position 675
-7 Adenine reads
-12 Cytosine reads
-1699 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5634 in position 675
-3 Adenine reads
-4 Cytosine reads
-1829 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5635 in position 675
-8 Adenine reads
-9 Cytosine reads
-4183 Guanine reads
-2 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5642 in position 675
-13 Adenine reads
-11 Cytosine reads
-5919 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5643 in position 675
-10 Adenine reads
-9 Cytosine reads
-4276 Guanine reads
-3 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5644 in position 675
-2 Adenine reads
-3 Cytosine reads
-3534 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 5654 in position 675
-7 Adenine reads
-1 Cytosine reads
-2920 Guanine reads
-3 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 6039 in position 675
-5 Adenine reads
-3 Cytosine reads
-1880 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 6840 in position 675
-0 Adenine reads
-0 Cytosine reads
-194 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 6846 in position 675
-3 Adenine reads
-1 Cytosine reads
-2450 Guanine reads
-1 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 7553 in position 675
-0 Adenine reads
-0 Cytosine reads
-249 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 7557 in position 675
-0 Adenine reads
-0 Cytosine reads
-309 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 7880 in position 675
-1 Adenine reads
-0 Cytosine reads
-104 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8371 in position 675
-1 Adenine reads
-1 Cytosine reads
-560 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8372 in position 675
-3 Adenine reads
-1 Cytosine reads
-597 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8373 in position 675
-1 Adenine reads
-0 Cytosine reads
-336 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8380 in position 675
-1 Adenine reads
-0 Cytosine reads
-442 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8388 in position 675
-1 Adenine reads
-1 Cytosine reads
-228 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8393 in position 675
-1 Adenine reads
-0 Cytosine reads
-172 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8397 in position 675
-1 Adenine reads
-0 Cytosine reads
-160 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8402 in position 675
-0 Adenine reads
-0 Cytosine reads
-1040 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8409 in position 675
-3 Adenine reads
-0 Cytosine reads
-611 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8417 in position 675
-0 Adenine reads
-0 Cytosine reads
-109 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8418 in position 675
-0 Adenine reads
-0 Cytosine reads
-184 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8425 in position 675
-0 Adenine reads
-0 Cytosine reads
-174 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8428 in position 675
-0 Adenine reads
-0 Cytosine reads
-191 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 8429 in position 675
-1 Adenine reads
-0 Cytosine reads
-275 Guanine reads
-0 Thymine reads
-There are 1 valid variants
-guanine_reads is valid with share 1
-
-Read of sample number 4144 in position 829
-1 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-180 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4584 in position 829
-0 Adenine reads
-6 Cytosine reads
-0 Guanine reads
-1815 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4585 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-78 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4591 in position 829
-0 Adenine reads
-5 Cytosine reads
-2 Guanine reads
-3027 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4649 in position 829
-1 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-163 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4686 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-123 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4693 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-541 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4694 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-167 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4696 in position 829
-1 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-386 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4697 in position 829
-2 Adenine reads
-4 Cytosine reads
-0 Guanine reads
-353 Thymine reads
-There are 2 valid variants
-thymine_reads is valid with share 0.9868893062975003
-
-Read of sample number 4705 in position 829
-1 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-878 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4706 in position 829
-1 Adenine reads
-458 Cytosine reads
-0 Guanine reads
-28 Thymine reads
-There are 2 valid variants
-cytosine_reads is valid with share 0.9436391666256126
-
-Read of sample number 4707 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-110 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4711 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-215 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4712 in position 829
-1 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-1299 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4713 in position 829
-0 Adenine reads
-3 Cytosine reads
-0 Guanine reads
-256 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4723 in position 829
-0 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-96 Thymine reads
-There are 2 valid variants
-thymine_reads is valid with share 0.9853282329429148
-
-Read of sample number 4724 in position 829
-0 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-264 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4726 in position 829
-0 Adenine reads
-3 Cytosine reads
-0 Guanine reads
-450 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4728 in position 829
-0 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-111 Thymine reads
-There are 2 valid variants
-thymine_reads is valid with share 0.9853282329429148
-
-Read of sample number 4780 in position 829
-0 Adenine reads
-3 Cytosine reads
-0 Guanine reads
-1032 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4781 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-101 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4938 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-238 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4969 in position 829
-1 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-576 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4970 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-496 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4972 in position 829
-0 Adenine reads
-1 Cytosine reads
-1 Guanine reads
-617 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4980 in position 829
-0 Adenine reads
-3 Cytosine reads
-0 Guanine reads
-1145 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4983 in position 829
-0 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-759 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4984 in position 829
-0 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-683 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4985 in position 829
-0 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-213 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 4988 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-908 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5029 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-130 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5033 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-222 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5047 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-176 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5633 in position 829
-1 Adenine reads
-3 Cytosine reads
-0 Guanine reads
-756 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5634 in position 829
-1 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-665 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5635 in position 829
-1 Adenine reads
-5 Cytosine reads
-2 Guanine reads
-1847 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5642 in position 829
-6 Adenine reads
-4 Cytosine reads
-0 Guanine reads
-2766 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5643 in position 829
-3 Adenine reads
-5 Cytosine reads
-0 Guanine reads
-1909 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5644 in position 829
-1 Adenine reads
-7 Cytosine reads
-0 Guanine reads
-1596 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 5654 in position 829
-1 Adenine reads
-4 Cytosine reads
-0 Guanine reads
-1465 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 6039 in position 829
-0 Adenine reads
-0 Cytosine reads
-1 Guanine reads
-771 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 6840 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-15 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 6846 in position 829
-0 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-1297 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 7553 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-16 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 7557 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-23 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 7880 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-13 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8371 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-174 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8372 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-209 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8373 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-91 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8380 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-82 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8388 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-32 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8393 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-43 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8397 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-28 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8402 in position 829
-2 Adenine reads
-2 Cytosine reads
-0 Guanine reads
-376 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8409 in position 829
-0 Adenine reads
-1 Cytosine reads
-0 Guanine reads
-147 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8417 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-20 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8418 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-32 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8425 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-23 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8428 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-84 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
-Read of sample number 8429 in position 829
-0 Adenine reads
-0 Cytosine reads
-0 Guanine reads
-54 Thymine reads
-There are 1 valid variants
-thymine_reads is valid with share 1
-
 Overall results 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
+It is T
 
 There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGC
-Second one isTGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTCT
-Second one isTGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
+
+There is 1 stamm
+It is T
+
+There is 1 stamm
+It is T
+
+There is 1 stamm
+It is T
+
+There is 1 stamm
+It is T
+
+There is 1 stamm
+It is T
 
 There are 2 stamms
-First one isCGT
-Second one isTGT
+First one is C
+Second one is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isCGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
+It is T
 
 There are 2 stamms
-First one isTGT
-Second one isTGC
+First one is T
+Second one is C
 
 There is 1 stamm
-It is TGT
+It is T
 
-There are 2 stamms
-First one isTGC
-Second one isTGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTCT
-Second one isTGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isCGT
-Second one isTGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isCGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGC
-Second one isTGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isTGC
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTCT
-Second one isTGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isCGT
-Second one isTGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There is 1 stamm
-It is TGT
-
-There are 2 stamms
-First one isTGT
-Second one isCGT
-
-There is 1 stamm
-It is TGT
-
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
 There is 1 stamm
-It is TGT
+It is T
 
+Time elapsed: 73.37984538078308 seconds

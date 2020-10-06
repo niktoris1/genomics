@@ -13,7 +13,7 @@ def LogLikelyhoodFunction1 (read, error_rate): #returns LLH function with one tr
         print('AWARE!!!')
         raise ValueError
     true_variants = get_max_and_min_variants(read, 1)[0]  # returns dictionary with 1 name of the most frequent nycleotyde and number of reads with them
-    false_variants = get_max_and_min_variants(read, 1)[1] # returns dictionary with 3 names of other nycleotydes
+    #false_variants = get_max_and_min_variants(read, 1)[1] # returns dictionary with 3 names of other nycleotydes
 
     LLH_value = StirlingLogFactorial(read.total_coverage()) - StirlingLogFactorial(true_variants[0][1])- StirlingLogFactorial(read.total_coverage() - true_variants[0][1])+true_variants[0][1] * log(1 - error_rate)+(read.total_coverage() - true_variants[0][1]) * log(error_rate)
 
@@ -74,11 +74,12 @@ def ResultingLLHByPerson(sample_id, error_rate, share):
     LLH_Value = 0
     for read in data:
         if read.sample_id == sample_id:
-            LLH_Value += GetBestLLHValueByRead(read, error_rate, share)[1]
+            BestLLHValue = GetBestLLHValueByRead(read, error_rate, share)
+            LLH_Value += BestLLHValue[1]
+            read.number_of_variants = BestLLHValue[0]
 
-            read.number_of_variants = GetBestLLHValueByRead(read, error_rate, share)[0]
             if read.number_of_variants == 2:
-                read.share = GetBestLLHValueByRead(read, error_rate, share)[2]
+                read.share = BestLLHValue[2]
             else:
                 read.share = 1
     
@@ -98,9 +99,9 @@ def OptimiseLLHByPerson(sample_id, error_rate): # We optimise it in assumption, 
     
     return [LLH_value, share]
 
-def ResultingLLHByData(data, error_rate):
-    samples = []
+def ResultingLLHByData(data, error_rate): # get an LLH after optimisation by persons
 
+    samples = []
     for read in data:
         if read.sample_id not in samples:
             samples.append([read.sample_id])
@@ -122,12 +123,13 @@ def OptimiseLLHByData(data):
 
 
     LLH_value = - LLH.fun
-    samples = ResultingLLHByData(data, LLH.x)[1]
-    error = LLH.x
+    LLH_error = LLH.x
+    samples = ResultingLLHByData(data, LLH_error)[1]
 
-    print('Value:', LLH_value, 'Error:', error)
 
-    return [LLH_value, samples, error]
+    print('Value:', LLH_value, 'Error:', LLH_error)
+
+    return [LLH_value, samples, LLH_error]
 
 
 
@@ -163,37 +165,14 @@ def GetStamms(data):
 
     return samples
 
+
+start_time = time.time()
+
 result = OptimiseLLHByData(data)
 stamms = GetStamms(data)
 
+end_time = time.time()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#x = np.arange(0.00, 1, 0.01)
-
-#y = []
-#z = []
-#for value in x:
-#    z.append(LogLikelyhoodFunction1(read, 0.001))
-#    y.append(LogLikelyhoodFunction2(read, 0.001, value))
-
-
-#plt.plot(x, y)
-#plt.plot(x, z)
-#plt.show()
 
 
 

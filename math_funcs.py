@@ -1,6 +1,8 @@
 import math
 from math import log
 
+
+
 def StirlingLogFactorial(n):
     if n == 0:
         return 0
