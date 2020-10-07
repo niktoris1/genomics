@@ -103,7 +103,7 @@ def ResultingLLHByData(data, error_rate): # get an LLH after optimisation by per
 
     samples = []
     for read in data:
-        if read.sample_id not in samples:
+        if [read.sample_id] not in samples:
             samples.append([read.sample_id])
 
     LLH_value = 0
@@ -131,6 +131,42 @@ def OptimiseLLHByData(data):
 
     return [LLH_value, samples, LLH_error]
 
+
+def TotalResultingLLH(error_rate, share_array): # share_array is an array of arrays [corresponding sample_num, share in this sample_num]
+
+    #share_array = []
+    #for read in data:
+    #    if [read.sample_id] not in share_array:
+    #        share_array.append([read.sample_id])
+
+    LLH_value = 0
+    for sample_with_share in share_array:
+        sample_res = ResultingLLHByPerson(sample_with_share[0], error_rate, sample_with_share[1])
+        LLH_value += sample_res
+
+    return LLH_value # #Try to
+
+def TotalOptimise():
+
+    start_error = 0.001
+
+    start_share = []
+    for read in data:
+        if [read.sample_id, 0.9] not in start_share:
+            start_share.append([read.sample_id, 0.9])
+
+    start_point = [start_error] + start_share
+
+
+    # <==== To be continued...
+
+    LLH = scipy.optimize.minimize(
+        lambda opt_point: - TotalResultingLLH(opt_point[0], opt_point[1]), start_point,
+        args=(data), method='Nelder-Mead', options={'tol': 1e-4})
+
+    return LLH.x #returns [error, [array_of_shares]]
+
+# in these two functions we try to ease an optimisation
 
 
 def GetStamms(data):
