@@ -33,19 +33,33 @@ file = open("data.txt", "r")
 raw_data = [line.split() for line in file]
 
 data = []
+ # needed for quite unelegant solution of several similar reads on one position - python methos "index" returns the first occurence in the list. Fixed
 
-for position_reads in raw_data[1:]:
-    start_el = 0 # needed for quite unelegant solution of several similar reads on one position - python methos "index" returns the first occurence in the list. Fixed
-    for sample_reads in position_reads[1:]:
+for position_read in raw_data[1:]:
+    position_num = 1
+    for sample_reads in position_read[1:]:
         freqs = sample_reads.split('_')
-        data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_reads[0], raw_data[0][position_reads.index(sample_reads, start_el)], 'Unknown', 'Unknown'))
-        start_el = position_reads.index(sample_reads) + 1
+        data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_read[0], raw_data[0][position_num], 'Unknown', 'Unknown'))
+        position_num = position_num + 1
+
+
+samples = []
+
+for read in data:
+    if [read.sample_id] not in samples:
+        samples.append([read.sample_id])
+for sample in samples:
+    counter = 0
+    sample.append(counter)
+    for read in data:
+        if read.sample_id == sample[0]:
+            sample[1] = sample[1] + 1
 
 
 
 
 for read in data:
-    if (read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA'):
+    if read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA':
         read.adenine_reads = 0
         read.cytosine_reads = 0
         read.guanine_reads = 0
@@ -59,6 +73,14 @@ for read in data:
         read.thymine_reads = int(read.thymine_reads)
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
+
+
+
+
+
+
+
+print(len(data))
 
 
 

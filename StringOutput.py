@@ -6,10 +6,10 @@ def GetStrings():
 
     for stamm in stamms:
         if stamm[1] == stamm[2]:
-            genomes.append([stamm[1], stamm[0], stamm[3]])
+            genomes.append([stamm[1], stamm[0], stamm[3], len(stamm[1])])
         else:
-            genomes.append([stamm[1], stamm[0], stamm[3]])
-            genomes.append([stamm[2], stamm[0], 1 - stamm[3]])
+            genomes.append([stamm[1], stamm[0], stamm[3], len(stamm[1])])
+            genomes.append([stamm[2], stamm[0], 1 - stamm[3], len(stamm[1])])
 
     outfile = open("resulting_genomes.txt", "w")
 

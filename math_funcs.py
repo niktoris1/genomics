@@ -3,8 +3,6 @@ from math import log
 
 import numpy as np
 
-
-
 def StirlingLogFactorial(n):
     if n == 0:
         return 0
@@ -14,11 +12,11 @@ def StirlingLogFactorial(n):
 def GetLetter(variant):
     if variant == 'adenine_reads':
         answer = 'A'
-    if variant == 'cytosine_reads':
+    elif variant == 'cytosine_reads':
         answer = 'C'
-    if variant == 'guanine_reads':
+    elif variant == 'guanine_reads':
         answer = 'G'
-    if variant == 'thymine_reads':
+    elif variant == 'thymine_reads':
         answer = 'T'
 
     return answer

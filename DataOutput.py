@@ -31,5 +31,6 @@ for sample in stamms:
         outfile.write('Second one is ' + str(sample[2]) + '\n')
         outfile.write('The share is ' + str(sample[3]) + '\n\n')
 
+
 outfile.write('Time elapsed: ' + str(end_time - start_time) + ' seconds')
 outfile.close()
