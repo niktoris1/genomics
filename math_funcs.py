@@ -1,6 +1,8 @@
 import math
 from math import log
 
+import numpy as np
+
 
 
 def StirlingLogFactorial(n):
@@ -20,3 +22,17 @@ def GetLetter(variant):
         answer = 'T'
 
     return answer
+
+def HammingDistance(first_string, second_string):
+    distance = 0
+    for letter_num in range(len(first_string)):
+        if first_string[letter_num] is not second_string[letter_num]:
+            distance = distance + 1
+    return distance
+
+def CreateDistanceMatrix(string_array):
+    distance_matrix = np.array([[0] * len(string_array)] * len(string_array))
+    for first_string_num in range(len(string_array)):
+        for second_string_num in range(len(string_array)):
+            distance_matrix[first_string_num][second_string_num] = HammingDistance(string_array[first_string_num], string_array[second_string_num])
+    return distance_matrix

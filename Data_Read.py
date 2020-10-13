@@ -42,9 +42,14 @@ for position_reads in raw_data[1:]:
         start_el = position_reads.index(sample_reads) + 1
 
 
+
+
 for read in data:
     if (read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA'):
-        data.remove(read)
+        read.adenine_reads = 0
+        read.cytosine_reads = 0
+        read.guanine_reads = 0
+        read.thymine_reads = 0
 
 
 for read in data:
@@ -54,6 +59,8 @@ for read in data:
         read.thymine_reads = int(read.thymine_reads)
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
+
+
 
 
 

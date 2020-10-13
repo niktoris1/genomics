@@ -82,7 +82,6 @@ def ResultingLLHByPerson(sample_id, error_rate, share):
                 read.share = BestLLHValue[2]
             else:
                 read.share = 1
-    
     return LLH_Value
 
 def OptimiseLLHByPerson(sample_id, error_rate): # We optimise it in assumption, that we know an error
@@ -124,12 +123,12 @@ def OptimiseLLHByData(data):
 
     LLH_value = - LLH.fun
     LLH_error = LLH.x
-    samples = ResultingLLHByData(data, LLH_error)[1]
+
 
 
     print('Value:', LLH_value, 'Error:', LLH_error)
 
-    return [LLH_value, samples, LLH_error]
+    return [LLH_value, LLH_error]
 
 
 def TotalResultingLLH(error_rate, share_array): # share_array is an array of arrays [corresponding sample_num, share in this sample_num]
@@ -174,12 +173,14 @@ def GetStamms(data):
     samples = []
 
     for read in data:
-        if read.sample_id not in samples:
+        if [read.sample_id] not in samples:
             samples.append([read.sample_id])
 
     for sample_id in samples:
         sample_id.append('')
         sample_id.append('')
+
+        sample_share = 1
 
         for read in data:
             if read.sample_id == sample_id[0]:
@@ -187,17 +188,24 @@ def GetStamms(data):
                     number_of_variants = 1
                 else:
                     number_of_variants = 2
-                variants = get_max_and_min_variants(read, number_of_variants)
-                if number_of_variants == 1:
 
-                    sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
-                    sample_id[2] = sample_id[2] + GetLetter(variants[0][0][0])
-                if number_of_variants == 2:
-                    sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
-                    sample_id[2] = sample_id[2] + GetLetter(variants[0][1][0])
+                if (read.adenine_reads == 0 and read.cytosine_reads == 0 and read.guanine_reads == 0 and read.thymine_reads == 0):
+                    sample_id[1] = sample_id[1] + '?'
+                    sample_id[2] = sample_id[2] + '?'
+                else:
+                    variants = get_max_and_min_variants(read, number_of_variants)
+                    if number_of_variants == 1:
+                        sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
+                        sample_id[2] = sample_id[2] + GetLetter(variants[0][0][0])
+                    if number_of_variants == 2:
+                        sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
+                        sample_id[2] = sample_id[2] + GetLetter(variants[0][1][0])
 
-        if sample_id[1] == sample_id[2]:
-            sample_id.remove(sample_id[2])
+                    if read.share != 1:
+                        sample_share = read.share
+
+        sample_id.append(sample_share)
+
 
     return samples
 
