@@ -33,30 +33,13 @@ file = open("data.txt", "r")
 raw_data = [line.split() for line in file]
 
 data = []
- # needed for quite unelegant solution of several similar reads on one position - python methos "index" returns the first occurence in the list. Fixed
 
 for position_read in raw_data[1:]:
-    position_num = 1
+    position_num = 1 # needed for quite unelegant solution of several similar reads on one position - python methos "index" returns the first occurence in the list. Fixed for now
     for sample_reads in position_read[1:]:
         freqs = sample_reads.split('_')
         data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_read[0], raw_data[0][position_num], 'Unknown', 'Unknown'))
         position_num = position_num + 1
-
-
-samples = []
-
-for read in data:
-    if [read.sample_id] not in samples:
-        samples.append([read.sample_id])
-for sample in samples:
-    counter = 0
-    sample.append(counter)
-    for read in data:
-        if read.sample_id == sample[0]:
-            sample[1] = sample[1] + 1
-
-
-
 
 for read in data:
     if read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA':
@@ -74,34 +57,4 @@ for read in data:
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
 
-
-
-
-
-
-
-print(len(data))
-
-
-
-
-
-
-
-
-
-#number_of_reads = []
-
-#for read in data:
-#    number_of_reads.append(read.total_coverage())
-
-#threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.99)] #set a threshold for the snv's with small number of reads
-
-#print(len(data))
-
-#for read in data:
-#    if read.total_coverage() < threshold:
-#        data.remove(read) # remove all reads smaller than threshold
-
-#print(len(data))
 

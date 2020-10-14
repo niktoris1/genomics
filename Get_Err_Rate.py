@@ -89,7 +89,7 @@ def OptimiseLLHByPerson(sample_id, error_rate): # We optimise it in assumption, 
     start_share = 0.9
     LLH = scipy.optimize.minimize_scalar(
         lambda share, sample_id, error_rate: - ResultingLLHByPerson(sample_id, error_rate, share), bounds = (0, 1),
-       args=(sample_id, error_rate), method='bounded', options={'xatol': 100000})
+       args=(sample_id, error_rate), method='bounded', options={'xatol': 1e-4})
 
     LLH_value = - LLH.fun
     share = LLH.x
@@ -118,7 +118,7 @@ def OptimiseLLHByData(data):
     start_error = 0.001
     LLH = scipy.optimize.minimize_scalar(
         lambda error_rate, data: - ResultingLLHByData(data, error_rate)[0], bounds=(0, 1),
-        args=(data), method='bounded', options={'xatol': 100000})
+        args=(data), method='bounded', options={'xatol': 1e-4})
 
 
     LLH_value = - LLH.fun
@@ -131,8 +131,11 @@ def OptimiseLLHByData(data):
 
 def GetStamms(data):
 
+    samples = []
 
-
+    for read in data:
+        if [read.sample_id] not in samples:
+            samples.append([read.sample_id])
 
     for sample in samples:
         sample.append('')
