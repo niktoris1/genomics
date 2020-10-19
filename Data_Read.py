@@ -34,17 +34,19 @@ raw_data = [line.split() for line in file]
 
 data = []
 
-for position_reads in raw_data[1:]:
-    start_el = 0 # needed for quite unelegant solution of several similar reads on one position - python methos "index" returns the first occurence in the list. Fixed
-    for sample_reads in position_reads[1:]:
+for position_read in raw_data[1:]:
+    position_num = 1 # needed for quite unelegant solution of several similar reads on one position - python methos "index" returns the first occurence in the list. Fixed for now
+    for sample_reads in position_read[1:]:
         freqs = sample_reads.split('_')
-        data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_reads[0], raw_data[0][position_reads.index(sample_reads, start_el)], 'Unknown', 'Unknown'))
-        start_el = position_reads.index(sample_reads) + 1
-
+        data.append(SNV_Reads(freqs[0], freqs[1], freqs[2], freqs[3], position_read[0], raw_data[0][position_num], 'Unknown', 'Unknown'))
+        position_num = position_num + 1
 
 for read in data:
-    if (read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA'):
-        data.remove(read)
+    if read.adenine_reads == 'NA' or read.cytosine_reads == 'NA' or read.guanine_reads == 'NA' or read.thymine_reads == 'NA':
+        read.adenine_reads = 0
+        read.cytosine_reads = 0
+        read.guanine_reads = 0
+        read.thymine_reads = 0
 
 
 for read in data:
@@ -55,24 +57,4 @@ for read in data:
         read.position = int(read.position)
         read.sample_id = int(read.sample_id)
 
-
-
-
-
-
-
-#number_of_reads = []
-
-#for read in data:
-#    number_of_reads.append(read.total_coverage())
-
-#threshold = sorted(number_of_reads)[math.floor(len(number_of_reads) * 0.99)] #set a threshold for the snv's with small number of reads
-
-#print(len(data))
-
-#for read in data:
-#    if read.total_coverage() < threshold:
-#        data.remove(read) # remove all reads smaller than threshold
-
-#print(len(data))
 

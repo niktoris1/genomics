@@ -70,10 +70,10 @@ def GetBestLLHValueByRead(read, error_rate, share): # We are given an error rate
     else:
         return [2, LLH2_value, share] # return an indication, that LLH2 is better, plus LLH2 itself and share, what share is the best
     
-def ResultingLLHByPerson(sample_id, error_rate, share):
+def ResultingLLHByPerson(sample_num, error_rate, share):
     LLH_Value = 0
     for read in data:
-        if read.sample_id == sample_id:
+        if read.sample_id == sample_num:
             BestLLHValue = GetBestLLHValueByRead(read, error_rate, share)
             LLH_Value += BestLLHValue[1]
             read.number_of_variants = BestLLHValue[0]
@@ -82,7 +82,6 @@ def ResultingLLHByPerson(sample_id, error_rate, share):
                 read.share = BestLLHValue[2]
             else:
                 read.share = 1
-    
     return LLH_Value
 
 def OptimiseLLHByPerson(sample_id, error_rate): # We optimise it in assumption, that we know an error
@@ -124,49 +123,10 @@ def OptimiseLLHByData(data):
 
     LLH_value = - LLH.fun
     LLH_error = LLH.x
-    samples = ResultingLLHByData(data, LLH_error)[1]
-
 
     print('Value:', LLH_value, 'Error:', LLH_error)
 
-    return [LLH_value, samples, LLH_error]
-
-
-def TotalResultingLLH(error_rate, share_array): # share_array is an array of arrays [corresponding sample_num, share in this sample_num]
-
-    #share_array = []
-    #for read in data:
-    #    if [read.sample_id] not in share_array:
-    #        share_array.append([read.sample_id])
-
-    LLH_value = 0
-    for sample_with_share in share_array:
-        sample_res = ResultingLLHByPerson(sample_with_share[0], error_rate, sample_with_share[1])
-        LLH_value += sample_res
-
-    return LLH_value # #Try to
-
-def TotalOptimise():
-
-    start_error = 0.001
-
-    start_share = []
-    for read in data:
-        if [read.sample_id, 0.9] not in start_share:
-            start_share.append([read.sample_id, 0.9])
-
-    start_point = [start_error] + start_share
-
-
-    # <==== To be continued...
-
-    LLH = scipy.optimize.minimize(
-        lambda opt_point: - TotalResultingLLH(opt_point[0], opt_point[1]), start_point,
-        args=(data), method='Nelder-Mead', options={'tol': 1e-4})
-
-    return LLH.x #returns [error, [array_of_shares]]
-
-# in these two functions we try to ease an optimisation
+    return [LLH_value, LLH_error]
 
 
 def GetStamms(data):
@@ -174,32 +134,43 @@ def GetStamms(data):
     samples = []
 
     for read in data:
-        if read.sample_id not in samples:
+        if [read.sample_id] not in samples:
             samples.append([read.sample_id])
 
-    for sample_id in samples:
-        sample_id.append('')
-        sample_id.append('')
+    for sample in samples:
+        sample.append('')
+        sample.append('')
 
-        for read in data:
-            if read.sample_id == sample_id[0]:
+        sample_share = 1
+
+        for read in data: # !!! in data we have more reads with som ids - why?
+            if read.sample_id == sample[0]:
                 if read.share == 1:
                     number_of_variants = 1
                 else:
                     number_of_variants = 2
-                variants = get_max_and_min_variants(read, number_of_variants)
-                if number_of_variants == 1:
 
-                    sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
-                    sample_id[2] = sample_id[2] + GetLetter(variants[0][0][0])
-                if number_of_variants == 2:
-                    sample_id[1] = sample_id[1] + GetLetter(variants[0][0][0])
-                    sample_id[2] = sample_id[2] + GetLetter(variants[0][1][0])
+                if read.adenine_reads == 0 and read.cytosine_reads == 0 and read.guanine_reads == 0 and read.thymine_reads == 0:
+                    sample[1] = sample[1] + '?'
+                    sample[2] = sample[2] + '?'
+                else:
+                    variants = get_max_and_min_variants(read, number_of_variants)
+                    if number_of_variants == 1:
+                        sample[1] = sample[1] + GetLetter(variants[0][0][0])
+                        sample[2] = sample[2] + GetLetter(variants[0][0][0])
+                    if number_of_variants == 2:
+                        sample[1] = sample[1] + GetLetter(variants[0][0][0])
+                        sample[2] = sample[2] + GetLetter(variants[0][1][0])
 
-        if sample_id[1] == sample_id[2]:
-            sample_id.remove(sample_id[2])
+                    if read.share != 1:
+                        sample_share = read.share
+
+        sample.append(sample_share)
+        sample.append(len(sample[1]))
+
 
     return samples
+
 
 
 start_time = time.time()
