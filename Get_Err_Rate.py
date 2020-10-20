@@ -1,4 +1,4 @@
-from Data_Read import data, get_max_and_min_variants, SNV_Reads
+from Data_Read import data, get_max_and_min_variants
 from math_funcs import StirlingLogFactorial, GetLetter
 import math
 from math import log

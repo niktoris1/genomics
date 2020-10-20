@@ -2,6 +2,8 @@ import math
 from math import log
 
 import numpy as np
+import pandas as pd
+from pandas import DataFrame
 
 def StirlingLogFactorial(n):
     if n == 0:
@@ -32,5 +34,8 @@ def CreateDistanceMatrix(string_array):
     distance_matrix = np.array([[0] * len(string_array)] * len(string_array))
     for first_string_num in range(len(string_array)):
         for second_string_num in range(len(string_array)):
-            distance_matrix[first_string_num][second_string_num] = HammingDistance(string_array[first_string_num], string_array[second_string_num])
-    return distance_matrix
+            distance_matrix[first_string_num][second_string_num] = int(HammingDistance(string_array[first_string_num], string_array[second_string_num]))
+
+    distance_matrixD = DataFrame(distance_matrix, columns=[string_array], index = [string_array])
+
+    return distance_matrixD

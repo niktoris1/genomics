@@ -1,6 +1,6 @@
 from Get_Err_Rate import result, data, get_max_and_min_variants, stamms, start_time, end_time
 
-outfile = open("result.txt", "w")
+outfile = open("../result.txt", "w")
 
 outfile.write('The sequencing error is: ' + str(result[1]) + '\n')
 
