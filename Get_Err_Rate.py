@@ -84,21 +84,8 @@ def ResultingLLHByPerson(sample_num, error_rate, share):
                 read.share = 1
     return LLH_Value
 
-def OptimiseLLHByPerson(sample_id, error_rate): # We optimise it in assumption, that we know an error
 
-    start_share = 0.9
-    LLH = scipy.optimize.minimize_scalar(
-        lambda share, sample_id, error_rate: - ResultingLLHByPerson(sample_id, error_rate, share), bounds = (0, 1),
-       args=(sample_id, error_rate), method='bounded', options={'xatol': 1e-4})
-
-    LLH_value = - LLH.fun
-    share = LLH.x
-
-    print('LLH optimised for person', sample_id, 'value', LLH_value)
-    
-    return [LLH_value, share]
-
-def ResultingLLHByData(data, error_rate): # get an LLH after optimisation by persons
+def ResultingLLHByData(data, error_rate, share_array): # share array is a share array for all samples
 
     samples = []
     for read in data:
@@ -107,19 +94,28 @@ def ResultingLLHByData(data, error_rate): # get an LLH after optimisation by per
 
     LLH_value = 0
     for sample in samples:
-        sample_res = OptimiseLLHByPerson(sample[0], error_rate)
+        sample_res = ResultingLLHByPerson(sample[0], error_rate, share_array[samples.index(sample)])
         LLH_value += sample_res[0]
         sample.append(sample_res[1])
 
-    return [LLH_value, samples] # return an array and samples in the following form [sample_id, share in sample]
+    return [LLH_value, samples]  # return an array and samples in the following form [sample_id, share in sample]
+
 
 def OptimiseLLHByData(data):
 
-    start_error = 0.001
-    LLH = scipy.optimize.minimize_scalar(
-        lambda error_rate, data: - ResultingLLHByData(data, error_rate)[0], bounds=(0, 1),
-        args=(data), method='bounded', options={'xatol': 1e-4})
+    samples = []
+    for read in data:
+        if [read.sample_id] not in samples:
+            samples.append([read.sample_id])
 
+    start_error = 0.001
+    start_share_array = [0.9] * len(samples)
+    start_parameters = [start_error] + [start_share_array]
+
+    resultwrapper = lambda parameters, data: - ResultingLLHByData(data, parameters[0], parameters[1])[0] # parameters is an array of type [error_rate, share]
+
+    LLH = scipy.optimize.minimize(
+        - ResultingLLHByData(data, error_rate, share_array)[0], start_parameters, args=(data), method='Nelder-Mead', tol=1e-6) # как тут работать?
 
     LLH_value = - LLH.fun
     LLH_error = LLH.x

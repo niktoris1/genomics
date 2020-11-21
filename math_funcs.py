@@ -39,3 +39,4 @@ def CreateDistanceMatrix(string_array):
     distance_matrixD = DataFrame(distance_matrix, columns=[string_array], index = [string_array])
 
     return distance_matrixD
+
