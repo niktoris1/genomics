@@ -146,11 +146,15 @@ def GetStamms(data):
             self.non_dominant_stamm = non_dominant_stamm
             self.sample_share = sample_share
 
-    sample_array = samples
+    sample_array = []
 
     for sample in sample_array:
 
         sample = sample_with_stamms(sample_id = sample, dominant_stamm = '', non_dominant_stamm = '', sample_share = 1)
+
+        sample_array.append(sample)
+
+        sample_share = 1 # setting a default value of sample_share
 
         for read in data:
             if read.sample_id == sample.sample_id:
@@ -163,7 +167,7 @@ def GetStamms(data):
                     sample.dominant_stamm = sample.dominant_stamm + '?'
                     sample.non_dominant_stamm = sample.non_dominant_stamm + '?'
                 else:
-                    variants = [max_and_min_variants(read, number_of_variants).max_variants, max_and_min_variants(read, number_of_variants).min_variants]
+                    variants = [max_and_min_variants(read, number_of_variants).max_variants(), max_and_min_variants(read, number_of_variants).min_variants()]
                     if number_of_variants == 1:
                         sample.dominant_stamm = sample.dominant_stamm + GetLetter(variants[0][0][0])
                         sample.non_dominant_stamm = sample.non_dominant_stamm + GetLetter(variants[0][0][0])

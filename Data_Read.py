@@ -35,10 +35,10 @@ class max_and_min_variants:
         return sorted_dict
 
     def max_variants(self):
-        return list(dict)[:self.number_of_variants]
+        return list(self.get_dict())[:self.number_of_variants]
 
     def min_variants(self):
-        return list(dict)[self.number_of_variants:]
+        return list(self.get_dict())[self.number_of_variants:]
 
 def data_read():
     file = open("data.txt", "r")
@@ -72,14 +72,16 @@ def data_read():
 def get_samples():
 
     samples = []
+
     for read in data:
-        if [read.sample_id] not in samples:
-            samples.append([read.sample_id])
+        if read.sample_id not in samples:
+            samples.append(read.sample_id)
 
     return samples
 
 data = data_read()
 samples = get_samples()
+
 
 
 

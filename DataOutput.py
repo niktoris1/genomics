@@ -2,7 +2,7 @@ from Get_Err_Rate import result, data, max_and_min_variants, stamms, start_time,
 
 outfile = open("../result.txt", "w")
 
-outfile.write('The sequencing error is: ' + str(result[1]) + '\n')
+outfile.write('The sequencing error is: ' + str(result.error_rate) + '\n')
 
 for read in data:
     outfile.write('Read of sample number ' + str(read.sample_id) + ' in position ' + str(read.position) + '\n')
@@ -12,11 +12,11 @@ for read in data:
     outfile.write(str(read.thymine_reads) + ' Thymine reads' + '\n')
     outfile.write('There are ' + str(read.number_of_variants) + ' valid variants' + '\n')
 
-    if len(max_and_min_variants(read, read.number_of_variants).max_variants) == 1:
-        outfile.write(str(max_and_min_variants(read, read.number_of_variants).max_variants[0][0]) + ' is valid with share ' + str(read.share) + '\n\n')
+    if len(max_and_min_variants(read, read.number_of_variants).max_variants()) == 1:
+        outfile.write(str(max_and_min_variants(read, read.number_of_variants).max_variants()[0][0][0]) + ' is valid with share ' + str(read.share) + '\n\n')
     else:
-        outfile.write(str(max_and_min_variants(read, read.number_of_variants).max_variants[0][0][0]) + ' is valid with share ' + str(read.share) + '\n\n')
-        outfile.write(str(max_and_min_variants(read, read.number_of_variants).max_variants[0][1][0]) + ' is valid with share ' + str(1 - read.share) + '\n\n')
+        outfile.write(str(max_and_min_variants(read, read.number_of_variants).max_variants()[0][0][0]) + ' is valid with share ' + str(read.share) + '\n\n')
+        outfile.write(str(max_and_min_variants(read, read.number_of_variants).max_variants()[0][1][0]) + ' is valid with share ' + str(1 - read.share) + '\n\n')
 
 outfile.write('Overall results \n')
 
@@ -34,3 +34,5 @@ for sample in stamms:
 
 outfile.write('Time elapsed: ' + str(end_time - start_time) + ' seconds')
 outfile.close()
+
+# For some reason nothing is outputed in DataOutput
