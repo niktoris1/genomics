@@ -1,4 +1,4 @@
-from Data_Read import data, get_max_and_min_variants
+from Data_Read import data, max_and_min_variants, SNV_Reads, samples
 from math_funcs import StirlingLogFactorial, GetLetter
 import math
 from math import log
@@ -12,7 +12,7 @@ def LogLikelyhoodFunction1 (read, error_rate): #returns LLH function with one tr
     if error_rate <= 0 or error_rate >= 1:
         print('AWARE!!!')
         raise ValueError
-    true_variants = get_max_and_min_variants(read, 1)[0]  # returns dictionary with 1 name of the most frequent nycleotyde and number of reads with them
+    true_variants = max_and_min_variants(read, 1).max_variants()  # returns dictionary with 1 name of the most frequent nycleotyde and number of reads with them
     #false_variants = get_max_and_min_variants(read, 1)[1] # returns dictionary with 3 names of other nycleotydes
 
     LLH_value = StirlingLogFactorial(read.total_coverage()) - StirlingLogFactorial(true_variants[0][1])- StirlingLogFactorial(read.total_coverage() - true_variants[0][1])+true_variants[0][1] * log(1 - error_rate)+(read.total_coverage() - true_variants[0][1]) * log(error_rate)
@@ -24,8 +24,8 @@ def LogLikelyhoodFunction2(read, error_rate, share): #returns LLH function with 
     if error_rate <= 0 or error_rate >= 1:
         print('AWARE!!!')
         raise ValueError
-    true_variants = get_max_and_min_variants(read, 2)[0]  # returns dictionary with 2 names of the most frequent nycleotydes and number of reads with them
-    false_variants = get_max_and_min_variants(read, 2)[1] # returns dictionary with other 2 nycleotydes
+    true_variants = max_and_min_variants(read, 2).max_variants()  # returns dictionary with 2 names of the most frequent nycleotydes and number of reads with them
+    #false_variants = max_and_min_variants(read, 2).min_variants() # returns dictionary with other 2 nycleotydes
 
     assumed_total_for_1st_nycleotyde = math.floor(read.total_coverage() * share)
     assumed_total_for_2nd_nycleotyde = read.total_coverage() - assumed_total_for_1st_nycleotyde
@@ -57,32 +57,38 @@ def LogLikelyhoodFunction2(read, error_rate, share): #returns LLH function with 
         LLH_value = logsumexp(prob_list) # we use this trick to find a log sum of exponents
     return LLH_value
 
+def GetBestLLHValueByRead(read, error_rate, share): # We are given an error rate and share and have to give the answer - is there one or two maximums(in assumption, that the share in 2 is known)?
 
-def GetBestLLHValueByRead(read, error_rate, share): # We are given an error rate and share and have to give the answer - is there one or two maximums and if 2 (in assumption, that the share in 2 is known)? 
+
     LLH1_value = LogLikelyhoodFunction1(read, error_rate)
+
+    if share >= 0.99: # We do not care for stamms with extra small shares
+        read.number_of_variants = 1
+        read.share = 1
+        read.LLH_value = LLH1_value
+        return LLH1_value
+
     LLH2_value = LogLikelyhoodFunction2(read, error_rate, share)
 
-    if share >= 0.989: # We do not bother with samples, where second variant is extremely small
-        return [1, LLH1_value]
-
     if LLH1_value > LLH2_value:
-        return [1, LLH1_value] # return an indication, that LLH1 is better, plus LLH1 itself
+        read.number_of_variants = 1
+        read.LLH_value = LLH1_value
+        read.share = 1
+        return LLH1_value
     else:
-        return [2, LLH2_value, share] # return an indication, that LLH2 is better, plus LLH2 itself and share, what share is the best
-    
-def ResultingLLHByPerson(sample_num, error_rate, share):
-    LLH_Value = 0
-    for read in data:
-        if read.sample_id == sample_num:
-            BestLLHValue = GetBestLLHValueByRead(read, error_rate, share)
-            LLH_Value += BestLLHValue[1]
-            read.number_of_variants = BestLLHValue[0]
+        read.number_of_variants = 2
+        read.share = share
+        read.LLH_value = LLH2_value
+        return LLH2_value
 
-            if read.number_of_variants == 2:
-                read.share = BestLLHValue[2]
-            else:
-                read.share = 1
-    return LLH_Value
+
+
+def ResultingLLHBySample(sample_id, error_rate, share):
+    LLH_Sample_Value = 0
+    for read in data:
+        if read.sample_id == sample_id:
+            LLH_Sample_Value += GetBestLLHValueByRead(read, error_rate, share)
+    return LLH_Sample_Value
 
 
 def ResultingLLHByData(data, error_rate, share_array): # share array is a share array for all samples
@@ -94,79 +100,84 @@ def ResultingLLHByData(data, error_rate, share_array): # share array is a share 
 
     LLH_value = 0
     for sample in samples:
-        sample_res = ResultingLLHByPerson(sample[0], error_rate, share_array[samples.index(sample)])
-        LLH_value += sample_res[0]
-        sample.append(sample_res[1])
+        sample_res = ResultingLLHBySample(sample[0], error_rate, share_array[samples.index(sample)])
+        LLH_value += sample_res
 
-    return [LLH_value, samples]  # return an array and samples in the following form [sample_id, share in sample]
-
+    return LLH_value  # return an array and samples in the following form [sample_id, share in sample]
 
 def OptimiseLLHByData(data):
 
-    samples = []
-    for read in data:
-        if [read.sample_id] not in samples:
-            samples.append([read.sample_id])
-
     start_error = 0.001
     start_share_array = [0.9] * len(samples)
-    start_parameters = [start_error] + [start_share_array]
+    start_parameters = [start_error] + start_share_array
 
-    resultwrapper = lambda parameters, data: - ResultingLLHByData(data, parameters[0], parameters[1])[0] # parameters is an array of type [error_rate, share]
+    resultwrapper = lambda parameters, data: - ResultingLLHByData(data, parameters[0], parameters[1:]) # parameters is an array of type [error_rate, share]
+
+    print('Optimisation started')
 
     LLH = scipy.optimize.minimize(
-        - ResultingLLHByData(data, error_rate, share_array)[0], start_parameters, args=(data), method='Nelder-Mead', tol=1e-6) # как тут работать?
+        resultwrapper, start_parameters, args=(data), method='Nelder-Mead', tol=1e-2)
+
+    print('Optimisation finished')
 
     LLH_value = - LLH.fun
-    LLH_error = LLH.x
+    LLH_error = LLH.x[0]
+    LLH_shares = LLH.x[1:]
 
-    print('Value:', LLH_value, 'Error:', LLH_error)
+    print('Value:', LLH_value, 'Error:', LLH_error, 'Shares:', LLH_shares)
 
-    return [LLH_value, LLH_error]
+    class LLH_data:
+        def __init__(self, LLH_value, error_rate, share_array):
+            self.LLH_value = LLH_value
+            self.error_rate = error_rate
+            self.share_array = share_array
+
+    Optimised_LLH = LLH_data(LLH_value, LLH_error, LLH_shares)
+
+    return Optimised_LLH
 
 
 def GetStamms(data):
 
-    samples = []
+    class sample_with_stamms:
+        def __init__(self, sample_id, dominant_stamm, non_dominant_stamm, sample_share):
+            self.sample_id = sample_id
+            self.dominant_stamm = dominant_stamm
+            self.non_dominant_stamm = non_dominant_stamm
+            self.sample_share = sample_share
 
-    for read in data:
-        if [read.sample_id] not in samples:
-            samples.append([read.sample_id])
+    sample_array = samples
 
-    for sample in samples:
-        sample.append('')
-        sample.append('')
+    for sample in sample_array:
 
-        sample_share = 1
+        sample = sample_with_stamms(sample_id = sample, dominant_stamm = '', non_dominant_stamm = '', sample_share = 1)
 
-        for read in data: # !!! in data we have more reads with som ids - why?
-            if read.sample_id == sample[0]:
+        for read in data:
+            if read.sample_id == sample.sample_id:
                 if read.share == 1:
                     number_of_variants = 1
                 else:
                     number_of_variants = 2
 
                 if read.adenine_reads == 0 and read.cytosine_reads == 0 and read.guanine_reads == 0 and read.thymine_reads == 0:
-                    sample[1] = sample[1] + '?'
-                    sample[2] = sample[2] + '?'
+                    sample.dominant_stamm = sample.dominant_stamm + '?'
+                    sample.non_dominant_stamm = sample.non_dominant_stamm + '?'
                 else:
-                    variants = get_max_and_min_variants(read, number_of_variants)
+                    variants = [max_and_min_variants(read, number_of_variants).max_variants, max_and_min_variants(read, number_of_variants).min_variants]
                     if number_of_variants == 1:
-                        sample[1] = sample[1] + GetLetter(variants[0][0][0])
-                        sample[2] = sample[2] + GetLetter(variants[0][0][0])
+                        sample.dominant_stamm = sample.dominant_stamm + GetLetter(variants[0][0][0])
+                        sample.non_dominant_stamm = sample.non_dominant_stamm + GetLetter(variants[0][0][0])
                     if number_of_variants == 2:
-                        sample[1] = sample[1] + GetLetter(variants[0][0][0])
-                        sample[2] = sample[2] + GetLetter(variants[0][1][0])
+                        sample.dominant_stamm = sample.dominant_stamm + GetLetter(variants[0][0][0])
+                        sample.non_dominant_stamm = sample.non_dominant_stamm + GetLetter(variants[0][1][0])
 
                     if read.share != 1:
                         sample_share = read.share
 
-        sample.append(sample_share)
-        sample.append(len(sample[1]))
+        sample.sample_share = sample_share
+        #sample.append(len(sample[1])) - not sure what was here
 
-
-    return samples
-
+    return sample_array # returns an array of samples with corresponding stamms and shares
 
 
 start_time = time.time()
@@ -175,6 +186,8 @@ result = OptimiseLLHByData(data)
 stamms = GetStamms(data)
 
 end_time = time.time()
+
+print('Optimisation took ', end_time - start_time, ' seconds')
 
 
 
