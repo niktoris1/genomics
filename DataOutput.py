@@ -1,6 +1,6 @@
 from Get_Err_Rate import result, data, max_and_min_variants, stamms, start_time, end_time
 
-outfile = open("../result.txt", "w")
+outfile = open("result.txt", "w")
 
 outfile.write('The sequencing error is: ' + str(result.error_rate) + '\n')
 
@@ -34,5 +34,7 @@ for sample in stamms:
 
 outfile.write('Time elapsed: ' + str(end_time - start_time) + ' seconds')
 outfile.close()
+
+print('lflf')
 
 # For some reason nothing is outputed in DataOutput
