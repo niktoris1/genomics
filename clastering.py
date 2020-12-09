@@ -85,9 +85,6 @@ for genome in genome_array:
         plt.annotate(str(round(genome[2], 2)), (genome[4][0], genome[4][1]))  # small annotate
 
 
-
-
-
 for first_genome in genome_array:
     for second_genome in genome_array:
         if first_genome is not second_genome and first_genome[1] == second_genome[1]:
