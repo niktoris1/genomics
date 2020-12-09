@@ -137,6 +137,8 @@ def OptimiseLLHByData(data):
     return Optimised_LLH
 
 
+
+
 def GetStamms(data):
 
     class sample_with_stamms:
@@ -148,7 +150,7 @@ def GetStamms(data):
 
     sample_array = []
 
-    for sample in sample_array:
+    for sample in samples:
 
         sample = sample_with_stamms(sample_id = sample, dominant_stamm = '', non_dominant_stamm = '', sample_share = 1)
 

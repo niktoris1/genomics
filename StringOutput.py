@@ -10,17 +10,21 @@ def GetStrings():
 
     genomes = [] # genomes are organised as [line, sample_id, share]
 
+    a = stamms
+
     for stamm in stamms:
-        if stamm[1] == stamm[2]:
+        if stamm.dominant_stamm == stamm.non_dominant_stamm:
             genomes.append(Genome(stamm.dominant_stamm, stamm.sample_id, stamm.sample_share))
         else:
             genomes.append(Genome(stamm.dominant_stamm, stamm.sample_id, stamm.sample_share))
             genomes.append(Genome(stamm.non_dominant_stamm, stamm.sample_id, 1 - stamm.sample_share))
 
-    outfile = open("Genomes retriveal/resulting_genomes.txt", "w")
+    outfile = open("resulting_genomes.txt", "w")
 
     for genome in genomes:
         outfile.write('There exist a genome ' + genome.genome_line + ' in a sample ' + str(genome.originating_sample) + ' with share ' + str(genome.share_in_sample) + '\n')
+
+    outfile.close()
 
     return genomes
 
