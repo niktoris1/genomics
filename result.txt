@@ -1,4 +1,4 @@
-The sequencing error is: 0.0008981767737938863
+The sequencing error is: 0.0011897619621257355
 Read of sample number 4144 in position 583
 2 Adenine reads
 9 Cytosine reads
@@ -15,5 +15,29 @@ Read of sample number 4584 in position 583
 There are 1 valid variants
 t is valid with share 1
 
+Read of sample number 4144 in position 675
+20 Adenine reads
+2 Cytosine reads
+20482 Guanine reads
+1 Thymine reads
+There are 1 valid variants
+g is valid with share 1
+
+Read of sample number 4584 in position 675
+8 Adenine reads
+3 Cytosine reads
+3822 Guanine reads
+2 Thymine reads
+There are 1 valid variants
+g is valid with share 1
+
 Overall results 
-Time elapsed: 2.6115128993988037 seconds
+There is 1 stamm in sample 4144
+The only one is TG
+The share is 1
+
+There is 1 stamm in sample 4584
+The only one is TG
+The share is 1
+
+Time elapsed: 15.992990493774414 seconds

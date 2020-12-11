@@ -93,14 +93,10 @@ def ResultingLLHBySample(sample_id, error_rate, share):
 
 def ResultingLLHByData(data, error_rate, share_array): # share array is a share array for all samples
 
-    samples = []
-    for read in data:
-        if [read.sample_id] not in samples:
-            samples.append([read.sample_id])
-
     LLH_value = 0
+
     for sample in samples:
-        sample_res = ResultingLLHBySample(sample[0], error_rate, share_array[samples.index(sample)])
+        sample_res = ResultingLLHBySample(sample, error_rate, share_array[samples.index(sample)])
         LLH_value += sample_res
 
     return LLH_value  # return an array and samples in the following form [sample_id, share in sample]

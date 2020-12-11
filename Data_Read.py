@@ -41,7 +41,7 @@ class max_and_min_variants:
         return list(self.get_dict())[self.number_of_variants:]
 
 def data_read():
-    file = open("data.txt", "r")
+    file = open("data_test.txt", "r")
     raw_data = [line.split() for line in file]
     data = []
 

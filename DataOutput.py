@@ -21,15 +21,15 @@ for read in data:
 outfile.write('Overall results \n')
 
 for sample in stamms:
-    if sample[1] == sample[2]: # both variant are the same, which means that there is only one variant
-        outfile.write('There is 1 stamm in sample ' + str(sample[0]) + '\n')
-        outfile.write('The only one is ' + str(sample[1]) + '\n')
-        outfile.write('The share is ' + str(sample[3]) + '\n\n')
+    if sample.dominant_stamm == sample.non_dominant_stamm: # both variant are the same, which means that there is only one variant
+        outfile.write('There is 1 stamm in sample ' + str(sample.sample_id) + '\n')
+        outfile.write('The only one is ' + str(sample.dominant_stamm) + '\n')
+        outfile.write('The share is ' + str(sample.sample_share) + '\n\n')
     else:
-        outfile.write('There are 2 stamms in sample ' + str(sample[0]) + '\n')
-        outfile.write('First one is ' + str(sample[1]) + '\n')
-        outfile.write('Second one is ' + str(sample[2]) + '\n')
-        outfile.write('The share is ' + str(sample[3]) + '\n\n')
+        outfile.write('There are 2 stamms in sample ' + str(sample.sample_id) + '\n')
+        outfile.write('First one is ' + str(sample.dominant_stamm) + '\n')
+        outfile.write('Second one is ' + str(sample.non_dominant_stamm) + '\n')
+        outfile.write('The share is ' + str(sample.sample_share) + '\n\n')
 
 
 outfile.write('Time elapsed: ' + str(end_time - start_time) + ' seconds')
